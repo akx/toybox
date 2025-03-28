@@ -1,0 +1,22 @@
+@import "tailwindcss";
+@import "@fontsource/geist-sans/400.css";
+@import "@fontsource/geist-sans/400.css";
+@import "@fontsource/geist-sans/600.css";
+@import "@fontsource/geist-sans/900.css";
+@import "@fontsource/ibm-plex-mono/400.css";
+@import "@fontsource/ibm-plex-mono/700.css";
+
+@plugin "daisyui" {
+  themes: bumblebee --default;
+}
+
+body {
+  font-size: 11pt;
+  background: linear-gradient(rgba(254, 202, 87, 0.33), rgba(238, 82, 83, 0.33)), url(geometry.webp);
+  height: 100vh;
+}
+
+@theme {
+  --font-mono: "IBM Plex Mono", monospace;
+  --font-sans: "Geist Sans", sans-serif;
+}
