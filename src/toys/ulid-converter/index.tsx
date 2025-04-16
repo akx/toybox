@@ -3,6 +3,7 @@ import React from "react";
 import toast from "react-hot-toast";
 import { FaRegCopy, FaRegHandPointDown } from "react-icons/fa";
 
+import { ToyMainBox, ToyMainBoxesContainer } from "../../components/common.tsx";
 import { useTitle } from "../../hooks/useTitle.ts";
 import { toy } from "../../utils.ts";
 import * as ulidx from "./ulidx.ts";
@@ -70,7 +71,7 @@ function Generator() {
     }
   };
   return (
-    <div className="bg-white rounded-xl p-2 mt-2 flex flex-col gap-2">
+    <>
       <input
         type="number"
         min={0}
@@ -112,7 +113,7 @@ function Generator() {
         <FaRegHandPointDown className="mx-auto" />
       </div>
       <ULIDInfoDump info={generated} error={error} />
-    </div>
+    </>
   );
 }
 
@@ -134,7 +135,7 @@ function Parser() {
     }
   }, [inputStr]);
   return (
-    <div className="bg-white/80 rounded-xl p-2 mt-2 flex flex-col gap-2">
+    <>
       <input
         className="input w-full"
         placeholder="ULID/UUID"
@@ -145,24 +146,20 @@ function Parser() {
         <FaRegHandPointDown className="mx-auto" />
       </div>
       <ULIDInfoDump error={error} info={parsed} />
-    </div>
+    </>
   );
 }
 
 export const ulidConverter = toy("ulid-converter", "ULID converter", () => {
   useTitle("ULID Converter");
   return (
-    <div className="flex grow justify-center items-center">
-      <div className="flex gap-2 *:min-w-96">
-        <div>
-          <h2 className="text-xl">Generate</h2>
-          <Generator />
-        </div>
-        <div>
-          <h2 className="text-xl">Parse</h2>
-          <Parser />
-        </div>
-      </div>
-    </div>
+    <ToyMainBoxesContainer>
+      <ToyMainBox title="Generate">
+        <Generator />
+      </ToyMainBox>
+      <ToyMainBox title="Parse">
+        <Parser />
+      </ToyMainBox>
+    </ToyMainBoxesContainer>
   );
 });
