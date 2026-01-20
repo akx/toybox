@@ -1,4 +1,5 @@
 import js from "@eslint/js";
+import { defineConfig } from "eslint/config";
 import prettierConfig from "eslint-config-prettier";
 import reactPlugin from "eslint-plugin-react";
 import reactHooks from "eslint-plugin-react-hooks";
@@ -8,15 +9,17 @@ import globals from "globals";
 import tseslint from "typescript-eslint";
 
 const overrides = {
+  "prefer-template": "error",
+  "react/no-unescaped-entities": "off",
+  "react/prop-types": "off",
+  "react/react-in-jsx-scope": "off",
   "unicorn/filename-case": "off",
+  "unicorn/no-array-reverse": "off",
+  "unicorn/no-array-sort": "off",
   "unicorn/no-null": "off",
   "unicorn/prefer-optional-catch-binding": "off",
   "unicorn/prevent-abbreviations": "off",
   "unicorn/text-encoding-identifier-case": "off",
-  "react/no-unescaped-entities": "off",
-  "react/prop-types": "off",
-  "react/react-in-jsx-scope": "off",
-  "prefer-template": "error",
   "@typescript-eslint/no-unused-vars": [
     "error",
     {
@@ -31,7 +34,7 @@ const overrides = {
   ],
 };
 
-export default tseslint.config(
+export default defineConfig(
   { ignores: ["dist", "postcss.config.cjs"] },
   {
     languageOptions: {
@@ -43,7 +46,7 @@ export default tseslint.config(
   js.configs.recommended,
   tseslint.configs.recommended,
   reactPlugin.configs.flat.recommended,
-  reactHooks.configs["recommended-latest"],
+  reactHooks.configs.flat["recommended-latest"],
   eslintPluginUnicorn.configs.recommended,
   prettierConfig,
   {
