@@ -52,7 +52,7 @@ function Redactor() {
       <ToyMainBox title="Input">
         <textarea
           ref={textareaRef}
-          className="textarea w-full min-w-xl min-h-64 font-mono text-sm"
+          className="textarea w-full sm:min-w-96 md:min-w-xl min-h-64 font-mono text-sm"
           placeholder="Paste your text here, then select characters or ranges to redact them..."
           value={text}
           onChange={(e) => setText(e.target.value)}

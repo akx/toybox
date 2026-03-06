@@ -33,7 +33,7 @@ function Output({ cookieHeader, domain, path, includeSubdomains, secure, expirat
   return (
     <>
       <textarea
-        className="textarea w-full min-w-xl min-h-48 font-mono text-sm grow"
+        className="textarea w-full min-h-48 font-mono text-sm grow"
         placeholder="Output will appear here. Yum!"
         readOnly
         value={output}

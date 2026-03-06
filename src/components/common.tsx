@@ -4,7 +4,7 @@ export const toyMainBoxStyle = "bg-white/80 rounded-xl p-2 mt-2 flex flex-col ga
 export function ToyMainBoxesContainer({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex grow justify-center items-center">
-      <div className="flex gap-2 *:min-w-96">{children}</div>
+      <div className="flex flex-wrap md:flex-nowrap justify-center gap-2 *:min-w-72">{children}</div>
     </div>
   );
 }

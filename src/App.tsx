@@ -26,9 +26,10 @@ function NavBar({ toys }: { toys: readonly ToyFunction[] }) {
   const [location] = useLocation();
   const [colorOfTheDay] = React.useState(() => getRandomToyColor());
   return (
-    <div className="bg-white/60 py-2 px-2 rounded leading-tight flex gap-2 items-center">
+    <div className="bg-white/60 py-2 px-2 rounded leading-tight flex flex-wrap gap-2 items-center">
       <Link to="/" className="font-mono font-bold hover:underline">
-        <span style={{ color: colorOfTheDay.hex }}>*</span> toybox!
+        <span style={{ color: colorOfTheDay.hex }}>*</span>
+        <span className="hidden md:inline">&nbsp;toybox!</span>
       </Link>
       {[...toys]
         .sort((a, b) => a.displayName.localeCompare(b.displayName))
