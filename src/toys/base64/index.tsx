@@ -7,11 +7,11 @@ import { useTitle } from "../../hooks/useTitle.ts";
 import { toy } from "../../utils.ts";
 
 function toUrlSafe(b64: string): string {
-  return b64.replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+  return b64.replaceAll("+", "-").replaceAll("/", "_").replaceAll(/=+$/g, "");
 }
 
 function fromUrlSafe(b64: string): string {
-  let s = b64.replace(/-/g, "+").replace(/_/g, "/");
+  let s = b64.replaceAll("-", "+").replaceAll("_", "/");
   while (s.length % 4) s += "=";
   return s;
 }
@@ -28,23 +28,23 @@ function Base64Tool() {
       const encoded = btoa(
         new TextEncoder()
           .encode(input)
-          .reduce((acc, byte) => acc + String.fromCharCode(byte), ""),
+          .reduce((acc, byte) => acc + String.fromCodePoint(byte), ""),
       );
       setOutput(urlSafe ? toUrlSafe(encoded) : encoded);
       setError("");
-    } catch (e) {
-      setError(`Encode error: ${e instanceof Error ? e.message : e}`);
+    } catch (error_) {
+      setError(`Encode error: ${error_ instanceof Error ? error_.message : error_}`);
     }
   };
 
   const decode = () => {
     try {
       const b64 = urlSafe ? fromUrlSafe(input) : input;
-      const bytes = Uint8Array.from(atob(b64), (c) => c.charCodeAt(0));
+      const bytes = Uint8Array.from(atob(b64), (c) => c.codePointAt(0)!);
       setOutput(new TextDecoder().decode(bytes));
       setError("");
-    } catch (e) {
-      setError(`Decode error: ${e instanceof Error ? e.message : e}`);
+    } catch (error_) {
+      setError(`Decode error: ${error_ instanceof Error ? error_.message : error_}`);
     }
   };
 

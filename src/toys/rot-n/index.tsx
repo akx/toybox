@@ -9,9 +9,9 @@ import { toy } from "../../utils.ts";
 function rotN(text: string, n: number): string {
   return [...text]
     .map((ch) => {
-      const code = ch.charCodeAt(0);
-      if (code >= 65 && code <= 90) return String.fromCharCode(((code - 65 + n) % 26) + 65);
-      if (code >= 97 && code <= 122) return String.fromCharCode(((code - 97 + n) % 26) + 97);
+      const code = ch.codePointAt(0)!;
+      if (code >= 65 && code <= 90) return String.fromCodePoint(((code - 65 + n) % 26) + 65);
+      if (code >= 97 && code <= 122) return String.fromCodePoint(((code - 97 + n) % 26) + 97);
       return ch;
     })
     .join("");
