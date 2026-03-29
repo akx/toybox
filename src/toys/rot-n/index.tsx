@@ -75,4 +75,4 @@ function RotN() {
   );
 }
 
-export const rotN = toy("rot-n", "ROT-N", RotN);
+export const rotNToy = toy("rot-n", "ROT-N", RotN);
