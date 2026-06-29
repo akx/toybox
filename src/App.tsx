@@ -14,8 +14,7 @@ async function loadToys(): Promise<ToyFunction[]> {
   };
   for (const path in toyFiles) {
     const mod = (await toyFiles[path]!()) as Record<string, unknown>;
-    for (const ex of Object.keys(mod)) {
-      const exp = mod[ex];
+    for (const exp of Object.values(mod)) {
       if (isToyFunction(exp)) toys.push(exp);
     }
   }
@@ -52,7 +51,7 @@ function NavBar({ toys }: { toys: readonly ToyFunction[] }) {
 function App() {
   const [toys, setToys] = React.useState<ToyFunction[]>([]);
   React.useEffect(() => {
-    loadToys().then(setToys);
+    void loadToys().then(setToys);
   }, []);
   return (
     <div className="flex flex-col w-full h-full p-2 gap-2">

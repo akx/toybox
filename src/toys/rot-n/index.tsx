@@ -25,10 +25,12 @@ function RotN() {
   const output = React.useMemo(() => rotN(input, ((n % 26) + 26) % 26), [input, n]);
 
   const handleCopy = () => {
-    if (output) {
-      navigator.clipboard.writeText(output);
-      toast.success("Copied to clipboard");
+    if (!output) {
+      return;
     }
+
+    navigator.clipboard.writeText(output);
+    toast.success("Copied to clipboard");
   };
 
   return (

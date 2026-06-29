@@ -50,6 +50,7 @@ function TextConverter() {
   const [dataURI, error] = React.useMemo((): [string | null, string | null] => {
     if (!text.trim()) return [null, null];
     try {
+      // eslint-disable-next-line unicorn/prefer-uint8array-base64
       const encoded = btoa(unescape(encodeURIComponent(text)));
       return [`data:${mimeType};base64,${encoded}`, null];
     } catch (error_) {

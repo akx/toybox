@@ -68,7 +68,7 @@ export function decodeTime(id: string): number {
   }
   const time = [...id.slice(0, Math.max(0, TIME_LEN)).toUpperCase()]
     .reverse()
-    // eslint-disable-next-line unicorn/no-array-reduce
+    // eslint-disable-next-line unicorn/no-array-reduce,unicorn/prefer-array-last-methods
     .reduce((carry, char, index) => {
       const encodingIndex = ENCODING.indexOf(char);
       if (encodingIndex === -1) {
@@ -84,7 +84,7 @@ export function decodeTime(id: string): number {
 
 function encodeRandom(len: number): string {
   const buffer = new Uint8Array(len);
-  globalThis.crypto.getRandomValues(buffer);
+  crypto.getRandomValues(buffer);
   let str = "";
   for (const element of buffer) {
     str += B32_CHARACTERS[element % B32_CHARACTERS.length];
@@ -108,6 +108,7 @@ function encodeTime(now: number, len: number): string {
   if (now < 0) {
     throw new Error(`Time must be positive: ${now}`);
   }
+  // eslint-disable-next-line unicorn/prefer-number-is-safe-integer
   if (!Number.isInteger(now)) {
     throw new TypeError(`Time must be an integer: ${now}`);
   }

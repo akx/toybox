@@ -24,10 +24,12 @@ function Output({ cookieHeader, domain, path, includeSubdomains, secure, expirat
   }, [cookieHeader, domain, path, includeSubdomains, secure, expiration]);
 
   const handleCopy = () => {
-    if (output) {
-      navigator.clipboard.writeText(output);
-      toast.success("Copied to clipboard");
+    if (!output) {
+      return;
     }
+
+    navigator.clipboard.writeText(output);
+    toast.success("Copied to clipboard");
   };
 
   return (

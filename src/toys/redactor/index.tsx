@@ -37,10 +37,12 @@ function Redactor() {
   };
 
   const handleCopy = () => {
-    if (text) {
-      navigator.clipboard.writeText(text);
-      toast.success("Copied to clipboard");
+    if (!text) {
+      return;
     }
+
+    navigator.clipboard.writeText(text);
+    toast.success("Copied to clipboard");
   };
 
   const handleClear = () => {

@@ -1,7 +1,7 @@
 import js from "@eslint/js";
+import eslintReact from "@eslint-react/eslint-plugin";
 import { defineConfig } from "eslint/config";
 import prettierConfig from "eslint-config-prettier";
-import reactPlugin from "eslint-plugin-react";
 import reactHooks from "eslint-plugin-react-hooks";
 import simpleImportSort from "eslint-plugin-simple-import-sort";
 import eslintPluginUnicorn from "eslint-plugin-unicorn";
@@ -17,6 +17,8 @@ const overrides = {
   "unicorn/no-array-reverse": "off",
   "unicorn/no-array-sort": "off",
   "unicorn/no-null": "off",
+  "unicorn/name-replacements": "off",
+  "unicorn/consistent-boolean-name": "off",
   "unicorn/prefer-optional-catch-binding": "off",
   "unicorn/prevent-abbreviations": "off",
   "unicorn/text-encoding-identifier-case": "off",
@@ -45,7 +47,7 @@ export default defineConfig(
   },
   js.configs.recommended,
   tseslint.configs.recommended,
-  reactPlugin.configs.flat.recommended,
+  eslintReact.configs["recommended-typescript"],
   reactHooks.configs.flat["recommended-latest"],
   eslintPluginUnicorn.configs.recommended,
   prettierConfig,

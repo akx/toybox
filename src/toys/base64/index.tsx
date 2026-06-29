@@ -25,11 +25,8 @@ function Base64Tool() {
 
   const encode = () => {
     try {
-      const encoded = btoa(
-        new TextEncoder()
-          .encode(input)
-          .reduce((acc, byte) => acc + String.fromCodePoint(byte), ""),
-      );
+      // eslint-disable-next-line unicorn/prefer-uint8array-base64
+      const encoded = btoa(new TextEncoder().encode(input).reduce((acc, byte) => acc + String.fromCodePoint(byte), ""));
       setOutput(urlSafe ? toUrlSafe(encoded) : encoded);
       setError("");
     } catch (error_) {
@@ -40,6 +37,7 @@ function Base64Tool() {
   const decode = () => {
     try {
       const b64 = urlSafe ? fromUrlSafe(input) : input;
+      // eslint-disable-next-line unicorn/prefer-uint8array-base64
       const bytes = Uint8Array.from(atob(b64), (c) => c.codePointAt(0)!);
       setOutput(new TextDecoder().decode(bytes));
       setError("");
@@ -49,10 +47,12 @@ function Base64Tool() {
   };
 
   const handleCopy = () => {
-    if (output) {
-      navigator.clipboard.writeText(output);
-      toast.success("Copied to clipboard");
+    if (!output) {
+      return;
     }
+
+    navigator.clipboard.writeText(output);
+    toast.success("Copied to clipboard");
   };
 
   return (
